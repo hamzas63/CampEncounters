@@ -1,0 +1,101 @@
+<section class="h-100 h-custom" style="background-color: #3cb371;">
+  <div class="container py-5 h-100">
+  <div class="row d-flex justify-content-center align-items-center h-100">
+  <div class="col-lg-8 col-xl-6">
+  <div class="card rounded-3">
+  <div class="card-body p-4 p-md-5">
+  <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Let's Get Started</h3>
+
+
+
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+
+  <div class="field">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name" %>
+  </div>
+
+
+  <div class="field">
+    <%= f.label :middle_name %><br />
+    <%= f.text_field :middle_name, autofocus: true, autocomplete: "middle_name" %>
+  </div>
+
+
+  <div class="field">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name" %>
+  </div>
+
+
+  <div class="field">
+    <%= f.label :phone %><br />
+    <%= f.text_field :phone, autofocus: true, autocomplete: "phone" %>
+  </div>
+
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+
+  <div class="form-group">
+    <%= f.label :country%>
+    <div class="col-md-4">
+    <%= f.country_select :country, ["United States"], {}, { :class => "form-control" } %>
+    </div>
+  </div>
+
+
+  <div class="field">
+    <%= f.label :password %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "new-password" %>
+  </div>
+
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+
+  <br />
+
+  <div>
+    <p>By voluntarily registering on this site, you consent to:
+(i) the collection, use and disclosure by the XYZ Institutions of your personal information, including your personal health information for the purposes of: (a) institutional planning to assist with the creation (b) notification and/or delivery of other programs and services (c) statistical analysis necessary to further assist  (d) planning of or response to a natural disaster or other event deemed to be an emergency (collectively, the "Purposes"); and (ii) being contacted by the XYZ Institutions for reasons related to the Purposes. For more information please review our
+<a href="https://ge-stage-2019.herokuapp.com/privacy_policy">Privacy Policy</a></p>
+  </div>
+
+  <div class="form-group">
+    <%= f.radio_button :terms_of_service,"1" %>
+    <%= f.label :terms_of_service ,"I agree"%>
+    <br />
+    <%= f.radio_button :terms_of_service,"0" %>
+    <%= f.label :terms_of_service ,"I do not agree"%>
+  </div>
+
+  <br />
+
+  <div class="actions">
+    <%= f.submit "Sign up" %>
+  </div>
+<% end %>
+
+  <br />
+
+<%= render "devise/shared/links" %>
+
+
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+</section>

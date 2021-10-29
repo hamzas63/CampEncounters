@@ -26,7 +26,7 @@ gem 'devise'
 # gem 'image_processing', '~> 1.2'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
-
+gem 'jquery-rails'
 gem 'country_select', '~> 6.0'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

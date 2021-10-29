@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :search, only: [:index]
   devise_for :users
  # get 'users/sign_out' => 'devise/sessions#destroy'
   root to: "home#index"

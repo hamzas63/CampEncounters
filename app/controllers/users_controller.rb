@@ -3,13 +3,16 @@ class UsersController < ApplicationController
 
   # GET /users or /users.json
   def index
-    @users = User.all
+    if params[:query].present?
+      @pagy, @users = pagy(User.search(params[:query]),items: 2)
+    else
+      @pagy, @users = pagy(User.all, items: 3)
+    end
   end
 
   # GET /users/1 or /users/1.json
   def show
     @user = User.find params[:id]
-
   end
 
   # GET /users/new
@@ -67,6 +70,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :middle_name, :phone, :country, :terms_of_service, :email, :type, :password, :password_confirmation)
+      params.require(:user).permit(:first_name, :last_name, :role,  :middle_name, :phone, :country, :type)
     end
 end

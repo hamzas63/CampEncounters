@@ -1,17 +1,21 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  include PgSearch::Model
+
+  pg_search_scope :search, against: [:id, :first_name, :email]
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,:confirmable
 
   enum role: [:user, :admin]
   after_initialize :set_default_role, :if => :new_record?
 
+  attr_accessor :terms_of_service
+
   def set_default_role
     self.role ||= :user
   end
-
-  attr_accessor :terms_of_service
 
   def validate_password
     rules = {

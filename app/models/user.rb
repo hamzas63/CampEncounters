@@ -5,7 +5,7 @@ class User < ApplicationRecord
 
   attr_accessor :terms_of_service
 
-  has_one_attached :image, :dependent=> :destroy
+  has_one_attached :image, dependent: :destroy
 
   pg_search_scope :search, against: [:id, :first_name, :email]
 

@@ -79,11 +79,11 @@ class Admin::UsersController < ApplicationController
     end
 
     def sort_direction
-      %w[asc desc].include?(params[:direction]) ?  params[:direction] : nil
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : nil
     end
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :role,  :middle_name, :phone, :country, :type)
+      params.require(:user).permit(:first_name, :last_name, :role, :middle_name, :phone, :country, :type)
     end
 end

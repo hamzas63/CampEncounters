@@ -20,6 +20,25 @@
   margin-right: auto;
 }
 
+.pretty th .current {
+  padding-right: 12px;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+.pretty th .asc {
+  background-image: url("1.png");
+}
+
+.pretty th .desc {
+  background-image: url("2.png");
+}
+
+.image {
+  width: 200px;
+  display: block;
+}
+
 body {
   background-color: #3cb371;
 }

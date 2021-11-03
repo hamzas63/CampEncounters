@@ -3,6 +3,10 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   include PgSearch::Model
 
+  attr_accessor :terms_of_service
+
+  has_one_attached :image, :dependent=> :destroy
+
   pg_search_scope :search, against: [:id, :first_name, :email]
 
   devise :database_authenticatable, :registerable,
@@ -11,10 +15,18 @@ class User < ApplicationRecord
   enum role: [:user, :admin]
   after_initialize :set_default_role, :if => :new_record?
 
-  attr_accessor :terms_of_service
-
   def set_default_role
     self.role ||= :user
+  end
+
+  def self.to_csv
+    attributes = %w{ email first_name country phone }
+    CSV.generate(headers: true) do |csv|
+      csv << attributes
+      all.each do |user|
+        csv << attributes.map{ |attr| user.send(attr) }
+      end
+    end
   end
 
   def validate_password
@@ -30,7 +42,7 @@ class User < ApplicationRecord
     end
   end
 
-  validate :validate_password
+  validate :validate_password, on: :create
   validates :first_name, :phone, :country, presence: true
   validates :phone, numericality: { greater_than_or_equal_to: 0, only_integer: true }
   validates :terms_of_service, acceptance: { message: 'You have to agree to the terms of service. Contact Admin at xyz@projectname.com' }

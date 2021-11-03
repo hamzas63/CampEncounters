@@ -2,20 +2,30 @@
 
 <p>
   <strong>Name:</strong>
-  <%= @user.first_name %>
+  <%= @user.first_name %><br/>
 
-   <strong>Last Name:</strong>
-  <%= @user.last_name %>
+  <strong>Last Name:</strong>
+  <%= @user.last_name %><br/>
 
-   <strong>Country:</strong>
-  <%= @user.country %>
+  <strong>Country:</strong>
+  <%= @user.country %><br/>
 
-   <strong>Email:</strong>
-  <%= @user.email %>
+  <strong>Email:</strong>
+  <%= @user.email %><br/>
 
-   <strong>Phone Number:</strong>
-  <%= @user.phone %>
+  <strong>Phone Number:</strong>
+  <%= @user.phone %><br/>
+
+  <% if @user.image.attached? %>
+    <%= image_tag @user.image, class: "image" %>
+  <% end %>
 </p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<%= link_to 'Edit', edit_user_path(@user) %>
+
+<% if !@user.admin? %>
+  <%= link_to 'Back', users_path %>
+<% end %>
+<% if @user.admin? %>
+  <%= link_to 'Back', admin_users_path %>
+<% end %>

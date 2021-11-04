@@ -1,5 +1,6 @@
 <% if user_signed_in? %>
   <%= link_to 'ShowProfile', current_user %>
+  <%= link_to 'Invite User', new_user_invitation_path %>
   <%= form_with(url: admin_users_path, method: :get) do |f| %>
   <%= f.text_field :query %>
   <%= f.submit 'Search'%>
@@ -24,6 +25,7 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
+        <%# if user.invitation_accepted? %>
         <td><%= user.first_name %></td>
         <td><%= user.email %></td>
         <td><%= user.phone %></td>
@@ -34,12 +36,13 @@
           <td><%= link_to 'Show', admin_user_path(user) , class: 'btn btn-outline-danger btn-sm' %></td>
           <td><%= link_to 'Edit', edit_admin_user_path(user) , class: 'btn btn-outline-danger btn-sm' %></td>
         <% end %>
+        <%# end %>
       </tr>
     <% end %>
   </tbody>
   </table>
 
-  <%= link_to 'New User', new_admin_user_path, class:'btn btn-secondary mb-3' %><br/>
+  <%#= link_to 'New User', new_admin_user_path, class:'btn btn-secondary mb-3' %>
   <%= link_to 'Download CSV', admin_users_path(@users, format: :csv), class: 'mb-3' %><br/>
 
   <%= pagy_bootstrap_nav(@pagy).html_safe %>

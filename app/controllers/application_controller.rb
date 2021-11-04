@@ -12,14 +12,18 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:first_name, :last_name, :middle_name, :phone, :country, :terms_of_service, :email, :type, :password, :password_confirmation) }
 
     devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:first_name, :last_name, :middle_name, :phone, :country, :terms_of_service, :email, :password, :type, :current_password) }
+
+    devise_parameter_sanitizer.permit(:accept_invitation) { |u| u.permit(:first_name, :last_name, :middle_name, :phone, :country, :terms_of_service, :invitation_token, :email, :password, :type, :current_password, :password_confirmation) }
+
+    devise_parameter_sanitizer.permit(:invite) { |u| u.permit(:first_name, :last_name, :middle_name, :phone, :country, :terms_of_service, :invitation_token, :email, :password, :type, :current_password, :password_confirmation) }
   end
 
   def after_sign_in_path_for(resource)
-    if current_user.admin?
+    if resource.admin?
       admin_users_path
     #elsif current_user.superadmin?
     #  root_path
-    elsif current_user.user?
+    elsif resource.user?
       users_path
      end
   end

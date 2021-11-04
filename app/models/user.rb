@@ -5,14 +5,15 @@ class User < ApplicationRecord
 
   attr_accessor :terms_of_service
 
-  has_one_attached :image, :dependent=> :destroy
+  has_one_attached :image, dependent: :destroy
 
   pg_search_scope :search, against: [:id, :first_name, :email]
 
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,:confirmable
+  devise :invitable, :database_authenticatable, :registerable,
+  :recoverable, :rememberable, :validatable, :confirmable, validate_on_invite: true
 
   enum role: [:user, :admin]
+
   after_initialize :set_default_role, :if => :new_record?
 
   def set_default_role
@@ -42,7 +43,9 @@ class User < ApplicationRecord
     end
   end
 
-  validate :validate_password, on: :create
+  #validate :validate_password, on: :create
+  #validate :validate_password, on: :update
+  validate :validate_password, :unless => lambda { |u| u.password.nil? }
   validates :first_name, :phone, :country, presence: true
   validates :phone, numericality: { greater_than_or_equal_to: 0, only_integer: true }
   validates :terms_of_service, acceptance: { message: 'You have to agree to the terms of service. Contact Admin at xyz@projectname.com' }

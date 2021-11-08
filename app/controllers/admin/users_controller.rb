@@ -13,7 +13,7 @@ class Admin::UsersController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.csv { send_data User.all.to_csv, filename: 'users-#{Date.today}.csv' }
+      format.csv { send_data User.all.to_csv, filename: "users-#{Date.today}.csv" }
     end
   end
 
@@ -69,21 +69,21 @@ class Admin::UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    @user = User.find(params[:id])
+  end
 
-    def sort_column
-      User.column_names.include?(params[:sort]) ? params[:sort] : nil
-    end
+  def sort_column
+    User.column_names.include?(params[:sort]) ? params[:sort] : nil
+  end
 
-    def sort_direction
-      %w[asc desc].include?(params[:direction]) ? params[:direction] : nil
-    end
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : nil
+  end
 
-    # Only allow a list of trusted parameters through.
-    def user_params
-      params.require(:user).permit(:first_name, :last_name, :role, :middle_name, :phone, :country, :type)
-    end
+  # Only allow a list of trusted parameters through.
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :role, :middle_name, :phone, :country, :type)
+  end
 end

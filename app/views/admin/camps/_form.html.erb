@@ -1,0 +1,52 @@
+<%= form_with(model: @camp, url: admin_camps_path) do |form| %>
+  <% if camp.errors.any? %>
+    <div id='error_explanation'>
+      <h2><%= pluralize(camp.errors.count, 'error') %> prohibited this camp from being saved:</h2>
+      <ul>
+        <% camp.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class='field'>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class='field'>
+    <%= form.label :camp_type %>
+    <%= form.text_field :camp_type %>
+  </div>
+
+  <div class='field'>
+    <%= form.label :status %>
+    <%= form.text_field :status %>
+  </div>
+
+  <div class='field'>
+    <%= form.label :registartion_date %>
+    <%= form.date_field :registartion_date %>
+  </div>
+
+  <div class='field'>
+    <%= form.label :start_date %>
+    <%= form.date_field :start_date %>
+  </div>
+
+  <div class='field'>
+    <%= form.label :end_date %>
+    <%= form.date_field :end_date %>
+  </div>
+
+  <%= form.label :country %>
+  <%# Location.all.each do |location| %>
+  <%= form.collection_check_boxes :location_ids, Location.all, :id, :name %>
+  <%#= location.name %>
+  <%# end %>
+
+  <div class='actions'>
+    <%= form.submit %>
+  </div>
+<% end %>

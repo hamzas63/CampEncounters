@@ -1,0 +1,54 @@
+<% if user_signed_in? %>
+  <%#= link_to 'ShowProfile', current_camp %>
+  <%= link_to 'Add Camp', new_admin_camp_path %>
+  <%= form_with(url: admin_camps_path, method: :get) do |f| %>
+  <%= f.text_field :query %>
+  <%= f.submit 'Search'%>
+  <% end %>
+
+  <%= link_to 'Undo Search', admin_camps_path, class: 'mb-3' %>
+
+  <table class='table table-striped table-bordered table-hover'>
+  <thead class='thead-dark'>
+    <tr>
+      <th><%= sortable 'name' %></th>
+      <th><%= sortable 'camp_type' %></th>
+      <th><%= sortable 'status' %></th>
+      <th>registartion_date</th>
+      <th>location</th>
+      <th>Delete</th>
+      <th>Show</th>
+      <th>Edit</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @camps.each do |camp| %>
+      <tr>
+        <%# if camp.invitation_accepted? %>
+        <td><%= camp.name %></td>
+        <td><%= camp.camp_type %></td>
+        <td><%= camp.status %></td>
+        <td><%= camp.registartion_date %></td>
+        <td>
+          <% camp.locations.each do |c|%>
+            <%= "|" %>
+            <%= c.name %>
+          <%end%>
+        </td>
+        <%# if !camp.admin? %>
+          <td><%= link_to 'Delete', admin_camp_path(camp), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger btn-sm' %></td>
+          <td><%= link_to 'Show', admin_camp_path(camp) , class: 'btn btn-outline-danger btn-sm' %></td>
+          <td><%= link_to 'Edit', edit_admin_camp_path(camp) , class: 'btn btn-outline-danger btn-sm' %></td>
+        <%# end %>
+        <%# end %>
+      </tr>
+    <% end %>
+  </tbody>
+  </table>
+
+  <%#= link_to 'New User', new_admin_camp_path, class:'btn btn-secondary mb-3' %>
+  <%= link_to 'Download CSV', admin_camps_path(@camps, format: :csv), class: 'mb-3' %><br/>
+
+  <%= pagy_bootstrap_nav(@pagy).html_safe %>
+<% end %>

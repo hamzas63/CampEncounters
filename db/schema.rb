@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_03_111446) do
+ActiveRecord::Schema.define(version: 2021_11_05_060756) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,32 @@ ActiveRecord::Schema.define(version: 2021_11_03_111446) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "camplocations", force: :cascade do |t|
+    t.bigint "camp_id", null: false
+    t.bigint "location_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["camp_id"], name: "index_camplocations_on_camp_id"
+    t.index ["location_id"], name: "index_camplocations_on_location_id"
+  end
+
+  create_table "camps", force: :cascade do |t|
+    t.string "name"
+    t.string "camp_type"
+    t.integer "status"
+    t.date "start_date"
+    t.date "end_date"
+    t.date "registartion_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -79,4 +105,6 @@ ActiveRecord::Schema.define(version: 2021_11_03_111446) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "camplocations", "camps"
+  add_foreign_key "camplocations", "locations"
 end

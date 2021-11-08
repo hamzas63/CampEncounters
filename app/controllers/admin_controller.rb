@@ -4,10 +4,9 @@ class AdminController < ApplicationController
   def index; end
 
   private
-    def authorize_admin!
-      return if current_user.admin?
+  def authorize_admin!
+    return if current_user.admin?
 
-      redirect_to root_path, alert: 'You must be an admin to do that.'
-     end
+    redirect_to root_path, alert: 'You must be an admin to do that.'
   end
 end

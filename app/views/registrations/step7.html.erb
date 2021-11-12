@@ -1,0 +1,14 @@
+<%= render 'progress_bar', registration: @registration %>
+<%= form_for @registration, method: :put, url: wizard_path do |f| %>
+  <%= hidden_field_tag :registration_id, @registration.id %>
+  <%= f.label :martial_status, "Martial_status" %>
+  <%= f.text_field :martial_status %>
+
+  <div class="actions">
+    <%= f.submit "Continue" %>
+    <%= link_to "skip this step", next_wizard_path %>
+    <%= link_to "previous this step", previous_wizard_path %>
+  </div>
+<% end %>
+
+<p><%= link_to "Back to List", registrations_path %></p>

@@ -2,8 +2,8 @@
   <%#= link_to 'ShowProfile', current_camp %>
   <%= link_to 'Add Camp', new_admin_camp_path %>
   <%= form_with(url: admin_camps_path, method: :get) do |f| %>
-  <%= f.text_field :query %>
-  <%= f.submit 'Search'%>
+    <%= f.text_field :query %>
+    <%= f.submit 'Search'%>
   <% end %>
 
   <%= link_to 'Undo Search', admin_camps_path, class: 'mb-3' %>
@@ -40,6 +40,7 @@
           <td><%= link_to 'Delete', admin_camp_path(camp), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger btn-sm' %></td>
           <td><%= link_to 'Show', admin_camp_path(camp) , class: 'btn btn-outline-danger btn-sm' %></td>
           <td><%= link_to 'Edit', edit_admin_camp_path(camp) , class: 'btn btn-outline-danger btn-sm' %></td>
+          <td><%= link_to 'Activate', toggle_status_admin_camp_path(camp) , class: 'btn btn-outline-danger btn-sm' %></td>
         <%# end %>
         <%# end %>
       </tr>

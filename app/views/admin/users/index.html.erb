@@ -2,8 +2,8 @@
   <%= link_to 'ShowProfile', current_user %>
   <%= link_to 'Invite User', new_user_invitation_path %>
   <%= form_with(url: admin_users_path, method: :get) do |f| %>
-  <%= f.text_field :query %>
-  <%= f.submit 'Search'%>
+    <%= f.text_field :query %>
+    <%= f.submit 'Search'%>
   <% end %>
 
   <%= link_to 'Undo Search', admin_users_path, class: 'mb-3' %>

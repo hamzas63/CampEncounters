@@ -5,8 +5,20 @@ Rails.application.routes.draw do
   root to: "home#index"
 
   namespace :admin do
-    resources :users, :camps, :locations
+    resources :users
+    resources :camps do
+      member do
+        get :toggle_status
+      end
+    end
+    resources :locations
   end
+
   resources :users
-  resources :camps
+  resources :registrations
+  resources :camps do
+    member do
+      get :registration
+    end
+  end
 end

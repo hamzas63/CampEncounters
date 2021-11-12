@@ -19,6 +19,12 @@
   <% if @user.image.attached? %>
     <%= image_tag @user.image, class: "image" %>
   <% end %>
+
+  <ul>
+    <% @user.camps.each do |c|%>
+      <li> <%= c.name%> </li>
+    <%end%>
+  </ul>
 </p>
 
 <%= link_to 'Edit', edit_user_path(@user) %>

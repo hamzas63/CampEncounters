@@ -1,0 +1,56 @@
+<% if user_signed_in? %>
+  <h2>Your application is <%= @registration.progress %> % complete </h2>
+  <% if @registration.progress!=100 %>
+    <h2>Please fill out your remaining application</h2>
+    <table class='table table-striped table-bordered table-hover'>
+      <thead class='thead-dark'>
+        <tr>
+          <th>STEP NAMES</th>
+          <th>Select</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Step 2</td>
+          <td><%= link_to 'Continue', registration_path(:step2, registration: @registration) , class: 'btn btn-outline-danger btn-sm' %></td>
+        </tr>
+        <tr>
+          <td>Step 3</td>
+          <td><%= link_to 'Continue', registration_path(:step3, registration: @registration) , class: 'btn btn-outline-danger btn-sm' %></td>
+        </tr>
+        <tr>
+          <td>Step 4</td>
+          <td><%= link_to 'Continue', registration_path(:step4, registration: @registration) , class: 'btn btn-outline-danger btn-sm' %></td>
+        </tr>
+        <tr>
+          <td>Step 5</td>
+          <td><%= link_to 'Continue', registration_path(:step5, registration: @registration) , class: 'btn btn-outline-danger btn-sm' %></td>
+        </tr>
+        <tr>
+          <td>Step 6</td>
+          <td><%= link_to 'Continue', registration_path(:step6, registration: @registration) , class: 'btn btn-outline-danger btn-sm' %></td>
+        </tr>
+        <tr>
+          <td>Step 7</td>
+          <td><%= link_to 'Continue', registration_path(:step7, registration: @registration) , class: 'btn btn-outline-danger btn-sm' %></td>
+        </tr>
+        <tr>
+          <td>Step 8</td>
+          <td><%= link_to 'Continue', registration_path(:step8, registration: @registration) , class: 'btn btn-outline-danger btn-sm' %></td>
+        </tr>
+        <tr>
+          <td>Step 9</td>
+          <td><%= link_to 'Continue', registration_path(:step9, registration: @registration) , class: 'btn btn-outline-danger btn-sm' %></td>
+        </tr>
+        <tr>
+          <td>Step 10</td>
+          <td><%= link_to 'Continue', registration_path(:step10, registration: @registration) , class: 'btn btn-outline-danger btn-sm' %></td>
+        </tr>
+        <tr>
+          <td>Step 11</td>
+          <td><%= link_to 'Continue', registration_path(:step11, registration: @registration) , class: 'btn btn-outline-danger btn-sm' %></td>
+        </tr>
+      </tbody>
+    </table>
+  <% end %>
+<% end %>

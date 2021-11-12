@@ -1,7 +1,9 @@
 class Camp < ApplicationRecord
 
   has_many :camplocations
+  has_many :registrations
   has_many :locations, through: :camplocations
+  has_many :users, through: :registrations
 
   include PgSearch::Model
 
@@ -25,4 +27,11 @@ class Camp < ApplicationRecord
     end
   end
 
+  def end_date_after_start_date?
+    if end_date < start_date
+      errors.add :end_date, "must be after start date"
+    end
+  end
+
+  validate :end_date_after_start_date?
 end

@@ -1,0 +1,33 @@
+<%= render 'progress_bar', registration: @registration %>
+<%= form_for @registration, method: :put, url: wizard_path do |f| %>
+  <%= hidden_field_tag :registration_id, @registration.id %>
+
+  <p>
+    <strong>Name:</strong>
+    <%= current_user.first_name %><br/>
+
+    <strong>Last Name:</strong>
+    <%= current_user.last_name %><br/>
+
+    <strong>Country:</strong>
+    <%= current_user.country %><br/>
+
+    <strong>Email:</strong>
+    <%= current_user.email %><br/>
+
+    <strong>Phone Number:</strong>
+    <%= current_user.phone %><br/>
+
+    <% if current_user.image.attached? %>
+      <%= image_tag current_user.image, class: "image" %>
+    <% end %>
+
+    <%= f.label :gender, "Gender" %>
+    <%= f.text_field :gender %>
+
+    <div class="actions">
+      <%= f.submit "Continue" %>
+      <%= link_to "skip this step", next_wizard_path %>
+    </div>
+  </p>
+<% end %>

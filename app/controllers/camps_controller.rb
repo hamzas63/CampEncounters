@@ -1,24 +1,13 @@
-class Admin::CampsController < ApplicationController
-  before_action :set_camp, only: %i[ show edit update destroy toggle_status]
-  helper_method :sort_column, :sort_direction
+class CampsController < ApplicationController
   # GET /camps or /camps.json
   def index
-    if params[:query].present?
-      @pagy, @camps = pagy(Camp.search(params[:query]), items: 2)
-    elsif sort_column and sort_direction
-      @pagy, @camps = pagy(Camp.order(sort_column + ' ' + sort_direction), items: 3)
-    else
-      @pagy, @camps = pagy(Camp.all, items: 3)
-    end
-
-    respond_to do |format|
-      format.html
-      format.csv { send_data Camp.all.to_csv, filename: "camps-#{Date.today}.csv" }
-    end
+    @camp = Camp.all
   end
 
   # GET /camps/1 or /camps/1.json
   def show
+    #@camp.users = User.find(params[:camp][:user_ids].reject(&:blank?))
+    #@camp.user = current_user.id
     @camp = Camp.find(params[:id])
   end
 
@@ -38,7 +27,7 @@ class Admin::CampsController < ApplicationController
 
     respond_to do |format|
       if @camp.save
-        format.html { redirect_to admin_camps_path, notice: 'Camp was successfully created.' }
+        format.html { redirect_to camps_path, notice: 'Camp was successfully created.' }
         format.json { render :show, status: :created, location: @camp }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -51,7 +40,7 @@ class Admin::CampsController < ApplicationController
   def update
     respond_to do |format|
       if @camp.update(camp_params)
-        format.html { redirect_to admin_camps_path, notice: 'Camp was successfully updated.' }
+        format.html { redirect_to camps_path, notice: 'Camp was successfully updated.' }
         format.json { render :show, status: :ok, location: @camp }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -65,19 +54,15 @@ class Admin::CampsController < ApplicationController
     @camp.destroy
 
     respond_to do |format|
-      format.html { redirect_to admin_camps_path, notice: 'Camp was successfully destroyed.' }
+      format.html { redirect_to camps_path, notice: 'Camp was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
-  def toggle_status
-    if @camp.inactive?
-       @camp.active!
-    elsif @camp.active?
-      @camp.inactive!
-    end
-
-    redirect_to admin_camps_path, notice: 'Camp status has been updated.'
+  def registration
+    @registration = Registration.find_or_create_by(user_id: current_user.id, camp_id: params[:id])
+    session[:registration_id]=@registration.id
+    redirect_to registration_path(:step2, registration: @registration)
   end
 
   private
@@ -86,16 +71,8 @@ class Admin::CampsController < ApplicationController
     @camp = Camp.find(params[:id])
   end
 
-  def sort_column
-    Camp.column_names.include?(params[:sort]) ? params[:sort] : nil
-  end
-
-  def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : nil
-  end
-
   # Only allow a list of trusted parameters through.
   def camp_params
-    params.require(:camp).permit(:name, :camp_type, :status, :start_date, :end_date, :registartion_date, location_ids:[])
+    params.require(:camp).permit(:name, :camp_type, :status, :start_date, :end_date, :registartion_date, location_ids:[], user_ids:[])
   end
 end

@@ -7,6 +7,9 @@ class User < ApplicationRecord
 
   has_one_attached :image, dependent: :destroy
 
+  has_many :registrations
+  has_many :camps, through: :registrations
+
   pg_search_scope :search, against: [:id, :first_name, :email]
 
   devise :invitable, :database_authenticatable, :registerable,

@@ -52,5 +52,8 @@
         </tr>
       </tbody>
     </table>
+
+  <% else %>
+    <td><%= link_to 'Show Application', registration_path(:application_view, registration: @registration) , class: 'btn btn-outline-danger btn-sm' %></td>
   <% end %>
 <% end %>

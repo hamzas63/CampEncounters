@@ -1,4 +1,5 @@
 class CampsController < ApplicationController
+  before_action :set_camp
   # GET /camps or /camps.json
   def index
     @camp = Camp.all
@@ -60,15 +61,25 @@ class CampsController < ApplicationController
   end
 
   def registration
-    @registration = Registration.find_or_create_by(user_id: current_user.id, camp_id: params[:id])
-    session[:registration_id]=@registration.id
-    redirect_to registration_path(:step2, registration: @registration)
+    @camp = Camp.find(params[:id])
+    @date_now = Date.today
+    if @camp.start_date > @date_now
+      @registration = Registration.find_or_create_by(user_id: current_user.id, camp_id: params[:id])
+      session[:registration_id]=@registration.id
+      if @registration.progress.nil?
+        redirect_to registration_path(:step2, registration: @registration)
+      else
+        redirect_to registration_path(:index, registration: @registration)
+      end
+    else
+      redirect_to camps_path, notice: 'Please participate in next camp.'
+    end
   end
 
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_camp
-    @camp = Camp.find(params[:id])
+    #@camp = Camp.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.

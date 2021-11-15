@@ -5,7 +5,9 @@
   <%= f.text_field :medicine %>
 
   <div class="actions">
-    <%= f.submit "Continue" %>
+    <% if @registration.progress == 91 %>
+      <%= f.submit "Confirm", data: { confirm: 'Are you sure you want to submit the application?' }  %>
+    <% end %>
     <%= link_to "skip this step", next_wizard_path %>
     <%= link_to "previous this step", previous_wizard_path %>
   </div>

@@ -4,7 +4,7 @@ class RegistrationsController < ApplicationController
 
   include Wicked::Wizard
 
-  steps :step2, :step3, :step4, :step5, :step6, :step7, :step8, :step9, :step10, :step11, :index
+  steps :step2, :step3, :step4, :step5, :step6, :step7, :step8, :step9, :step10, :step11, :index, :application_view
 
 
   def index
@@ -50,7 +50,7 @@ class RegistrationsController < ApplicationController
 
   def set_progress
     if wizard_steps.any? && wizard_steps.index(step).present?
-      @registration.progress = ((wizard_steps.index(step) + 2).to_d / wizard_steps.count.to_d) * 100
+      @registration.progress = ((wizard_steps.index(step) + 3).to_d / wizard_steps.count.to_d) * 100
       @registration.save
     else
       @registration.progress = 0

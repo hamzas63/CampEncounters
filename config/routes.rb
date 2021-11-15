@@ -12,6 +12,13 @@ Rails.application.routes.draw do
       end
     end
     resources :locations
+    resources :registrations
+  end
+
+  namespace :api do
+    namespace :v1 do
+      resources :registrations, defaults: {format: :json}
+    end
   end
 
   resources :users

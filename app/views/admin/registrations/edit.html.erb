@@ -1,0 +1,58 @@
+<%= form_with(model: @registration, url: admin_registration_path) do |f| %>
+  <div class='field'>
+    <%= f.label :gender, "Gender" %>
+    <%= f.text_field :gender %>
+  </div>
+
+  <div class='field'>
+    <%= f.label :dob, "Date of Birth" %>
+    <%= f.date_field :dob %>
+  </div>
+
+  <div class='field'>
+    <%= f.label :confirmation_email, "Confirmation email" %>
+    <%= f.text_field :confirmation_email %>
+  </div>
+
+  <div class='field'>
+    <%= f.label :blood_group, "Blood group" %>
+    <%= f.text_field :blood_group %>
+  </div>
+
+  <div class='field'>
+    <%= f.label :nationality, "Nationality" %>
+    <%= f.text_field :nationality %>
+  </div>
+
+  <div class='field'>
+    <%= f.label :martial_status, "Martial_status" %>
+    <%= f.text_field :martial_status %>
+  </div>
+
+  <div class='field'>
+    <%= f.label :height, "Height" %>
+    <%= f.text_field :height %>
+  </div>
+
+  <div class='field'>
+    <%= f.label :weight, "Weight" %>
+    <%= f.text_field :weight %>
+  </div>
+
+  <div class='field'>
+    <%= f.label :allergy, "Allergy" %>
+    <%= f.text_field :allergy %>
+  </div>
+
+  <div class='field'>
+    <%= f.label :medicine, "Medicine" %>
+    <%= f.text_field :medicine %>
+  </div>
+
+  <div class='actions'>
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', admin_registrations_path %>
+

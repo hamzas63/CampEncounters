@@ -13,3 +13,13 @@ import 'bootstrap'
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+$(document).ready(function () {
+  $('.delete-confirm').on('click', function (e) {
+    if (confirm('are you sure you want to delete registration')) {
+      // do something
+    } else {
+      e.preventDefault();
+    }
+  });
+});

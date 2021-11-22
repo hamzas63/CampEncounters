@@ -35,10 +35,6 @@
     <%= form.text_field :phone %>
   </div>
 
-  <%= form.label :Select_Camp %><br/>
-  <%= form.collection_check_boxes :camp_ids, Camp.all, :id, :name %><br/>
-
-
   <div class='form-group'>
     <% if @user.image.attached? %>
       <%= image_tag @user.image, class: 'image' %>

@@ -12,20 +12,21 @@ Rails.application.routes.draw do
       end
     end
     resources :locations
-    resources :registrations
+    resources :applications
   end
 
   namespace :api do
     namespace :v1 do
-      resources :registrations, defaults: {format: :json}
+      resources :applications, defaults: {format: :json}
     end
   end
 
   resources :users
-  resources :registrations
+  resources :applications
   resources :camps do
     member do
-      get :registration
+      get :application
+      get :already_signed
     end
   end
 end

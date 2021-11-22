@@ -1,5 +1,4 @@
 <% if user_signed_in? %>
-  <%#= link_to 'ShowProfile', current_location %>
   <%= link_to 'Add location', new_admin_location_path %>
   <%= form_with(url: admin_locations_path, method: :get) do |f| %>
     <%= f.text_field :query %>
@@ -21,20 +20,15 @@
   <tbody>
     <% @locations.each do |location| %>
       <tr>
-        <%# if location.invitation_accepted? %>
         <td><%= location.name %></td>
-        <%# if !location.admin? %>
-          <td><%= link_to 'Delete', admin_location_path(location), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger btn-sm' %></td>
-          <td><%= link_to 'Show', admin_location_path(location) , class: 'btn btn-outline-danger btn-sm' %></td>
-          <td><%= link_to 'Edit', edit_admin_location_path(location) , class: 'btn btn-outline-danger btn-sm' %></td>
-          <%# end %>
-        <%# end %>
+        <td><%= link_to 'Delete', admin_location_path(location), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger btn-sm' %></td>
+        <td><%= link_to 'Show', admin_location_path(location) , class: 'btn btn-outline-danger btn-sm' %></td>
+        <td><%= link_to 'Edit', edit_admin_location_path(location) , class: 'btn btn-outline-danger btn-sm' %></td>
       </tr>
     <% end %>
   </tbody>
   </table>
 
-  <%#= link_to 'New User', new_admin_location_path, class:'btn btn-secondary mb-3' %>
   <%= link_to 'Download CSV', admin_locations_path(@locations, format: :csv), class: 'mb-3' %><br/>
 
   <%= pagy_bootstrap_nav(@pagy).html_safe %>

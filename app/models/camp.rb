@@ -1,30 +1,35 @@
 class Camp < ApplicationRecord
-
-  has_many :camplocations
-  has_many :registrations
-  has_many :locations, through: :camplocations
-  has_many :users, through: :registrations
+  has_many :camp_locations, dependent: :destroy
+  has_many :applications
+  has_many :locations, through: :camp_locations
+  has_many :users, through: :applications
 
   include PgSearch::Model
 
-  pg_search_scope :search, against: [:name, :type]
+  pg_search_scope :search, against: [:name, :camp_type, :status]
 
   enum status: [:active, :inactive]
 
-  after_initialize :set_default_status, :if => :new_record?
+  validate :end_date_after_start_date?
+
+  after_initialize :set_default_status, if: :new_record?
 
   def set_default_status
     self.status ||= :inactive
   end
 
+  def toggle_status
+    if self.inactive?
+      self.active!
+    elsif self.active?
+      self.inactive!
+    end
+  end
+
+
   def self.to_csv
     attributes = %w[name]
-    CSV.generate(headers: true) do |csv|
-      csv << attributes
-      all.each do |camp|
-        csv << attributes.map{ |attr| camp[attr] }
-      end
-    end
+    csv= CsvGenerator.to_csv_export(attributes, self)
   end
 
   def end_date_after_start_date?
@@ -32,6 +37,4 @@ class Camp < ApplicationRecord
       errors.add :end_date, "must be after start date"
     end
   end
-
-  validate :end_date_after_start_date?
 end

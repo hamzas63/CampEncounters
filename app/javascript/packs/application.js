@@ -16,8 +16,7 @@ ActiveStorage.start()
 
 $(document).ready(function () {
   $('.delete-confirm').on('click', function (e) {
-    if (confirm('are you sure you want to delete registration')) {
-      // do something
+    if (confirm('are you sure you want to delete user')) {
     } else {
       e.preventDefault();
     }

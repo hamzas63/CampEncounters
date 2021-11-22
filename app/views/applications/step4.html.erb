@@ -1,6 +1,6 @@
-<%= render 'progress_bar', registration: @registration %>
-<%= form_for @registration, method: :put, url: wizard_path do |f| %>
-  <%= hidden_field_tag :registration_id, @registration.id %>
+<%= render 'progress_bar', application: @application %>
+<%= form_for @application, method: :put, url: wizard_path do |f| %>
+  <%= hidden_field_tag :application_id, @application.id %>
   <%= f.label :confirmation_email, "Confirmation email" %>
   <%= f.text_field :confirmation_email %>
 
@@ -11,4 +11,4 @@
   </div>
 <% end %>
 
-<p><%= link_to "Back to List", registrations_path %></p>
+<p><%= link_to "Back to List", applications_path %></p>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_11_080058) do
+ActiveRecord::Schema.define(version: 2021_11_22_062025) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,13 +43,35 @@ ActiveRecord::Schema.define(version: 2021_11_11_080058) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "camplocations", force: :cascade do |t|
+  create_table "applications", force: :cascade do |t|
+    t.bigint "camp_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "gender"
+    t.date "dob"
+    t.string "blood_group"
+    t.string "occupation"
+    t.string "nationality"
+    t.string "martial_status"
+    t.string "confirmation_email"
+    t.integer "weight"
+    t.string "height"
+    t.integer "progress", default: 0
+    t.boolean "submitted", default: false
+    t.string "allergy"
+    t.string "medicine"
+    t.index ["camp_id"], name: "index_applications_on_camp_id"
+    t.index ["user_id"], name: "index_applications_on_user_id"
+  end
+
+  create_table "camp_locations", force: :cascade do |t|
     t.bigint "camp_id", null: false
     t.bigint "location_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["camp_id"], name: "index_camplocations_on_camp_id"
-    t.index ["location_id"], name: "index_camplocations_on_location_id"
+    t.index ["camp_id"], name: "index_camp_locations_on_camp_id"
+    t.index ["location_id"], name: "index_camp_locations_on_location_id"
   end
 
   create_table "camps", force: :cascade do |t|
@@ -67,28 +89,6 @@ ActiveRecord::Schema.define(version: 2021_11_11_080058) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "registrations", force: :cascade do |t|
-    t.bigint "camp_id", null: false
-    t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "gender"
-    t.date "dob"
-    t.string "blood_group"
-    t.string "occupation"
-    t.string "nationality"
-    t.string "martial_status"
-    t.string "confirmation_email"
-    t.integer "weight"
-    t.string "height"
-    t.integer "progress"
-    t.boolean "submitted"
-    t.string "allergy"
-    t.string "medicine"
-    t.index ["camp_id"], name: "index_registrations_on_camp_id"
-    t.index ["user_id"], name: "index_registrations_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -117,6 +117,7 @@ ActiveRecord::Schema.define(version: 2021_11_11_080058) do
     t.string "invited_by_type"
     t.bigint "invited_by_id"
     t.integer "invitations_count", default: 0
+    t.boolean "selected"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
@@ -127,8 +128,8 @@ ActiveRecord::Schema.define(version: 2021_11_11_080058) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "camplocations", "camps"
-  add_foreign_key "camplocations", "locations"
-  add_foreign_key "registrations", "camps"
-  add_foreign_key "registrations", "users"
+  add_foreign_key "applications", "camps"
+  add_foreign_key "applications", "users"
+  add_foreign_key "camp_locations", "camps"
+  add_foreign_key "camp_locations", "locations"
 end

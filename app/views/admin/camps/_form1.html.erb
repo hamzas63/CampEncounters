@@ -41,11 +41,7 @@
   </div>
 
   <%= form.label :country %>
-  <%# Location.all.each do |location| %>
   <%= form.collection_check_boxes :location_ids, Location.all, :id, :name %>
-  <%#= check_box_tag "camp[location_ids][]", location.id, @camp.location_ids.include?(location.id) %>
-  <%#= location.name %>
-  <%# end %>
 
   <div class='actions'>
     <%= form.submit %>

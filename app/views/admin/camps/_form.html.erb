@@ -41,10 +41,7 @@
   </div>
 
   <%= form.label :country %>
-  <%# Location.all.each do |location| %>
   <%= form.collection_check_boxes :location_ids, Location.all, :id, :name %>
-  <%#= location.name %>
-  <%# end %>
 
   <div class='actions'>
     <%= form.submit %>

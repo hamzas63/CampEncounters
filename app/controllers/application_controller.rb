@@ -6,27 +6,18 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  def json_payload
-    HashWithIndifferentAccess.new(JSON.parse(request.raw_post))
-  end
-
   protected
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:first_name, :last_name, :middle_name, :phone, :country, :terms_of_service, :email, :type, :password, :password_confirmation) }
-
     devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:first_name, :last_name, :middle_name, :phone, :country, :terms_of_service, :email, :password, :type, :current_password) }
-
     devise_parameter_sanitizer.permit(:accept_invitation) { |u| u.permit(:first_name, :last_name, :middle_name, :phone, :country, :terms_of_service, :invitation_token, :email, :password, :type, :current_password, :password_confirmation) }
-
     devise_parameter_sanitizer.permit(:invite) { |u| u.permit(:first_name, :last_name, :middle_name, :phone, :country, :terms_of_service, :invitation_token, :email, :password, :type, :current_password, :password_confirmation) }
   end
 
   def after_sign_in_path_for(resource)
     if resource.admin?
       admin_locations_path
-    #elsif current_user.superadmin?
-    #  root_path
     elsif resource.user?
       users_path
      end

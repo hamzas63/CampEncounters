@@ -1,5 +1,5 @@
 class Admin::ApplicationsController < AdminController
-  before_action :set_application , only: %i[ show edit update destroy ]
+  before_action :set_application, only: %i[show edit update destroy]
 
   def index
     @applications = Application.all

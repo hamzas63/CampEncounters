@@ -21,9 +21,8 @@ class User < ApplicationRecord
     self.role ||= :user
   end
 
-  def self.to_csv
-    attributes = %w[email first_name country phone]
-    csv= CsvGenerator.to_csv_export(attributes, self)
+  def self.attributes
+    %w[email first_name country phone]
   end
 
   def validate_password

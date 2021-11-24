@@ -9,8 +9,7 @@ class Location < ApplicationRecord
 
   private
 
-  def self.to_csv
-    attributes = %w[name]
-    csv= CsvGenerator.to_csv_export(attributes, self)
+  def self.attributes
+    %w[name]
   end
 end

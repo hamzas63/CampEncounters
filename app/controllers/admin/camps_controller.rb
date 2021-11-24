@@ -7,7 +7,7 @@ class Admin::CampsController < AdminController
     (@pagy, @camps) = pagy_search_sort(params[:query], Camp)
     respond_to do |format|
       format.html
-      format.csv { send_data Camp.all.to_csv, filename: "camps-#{Date.today}.csv" }
+      format.csv { send_data CsvGeneratorService.new(Camp).to_csv_export, filename: "camps-#{Date.today}.csv" }
     end
   end
 

@@ -27,9 +27,8 @@ class Camp < ApplicationRecord
   end
 
 
-  def self.to_csv
-    attributes = %w[name]
-    csv= CsvGenerator.to_csv_export(attributes, self)
+  def self.attributes
+    %w[name]
   end
 
   def end_date_after_start_date?

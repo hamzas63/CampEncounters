@@ -1,13 +1,13 @@
 class Admin::UsersController < AdminController
   include SearchSort
-  before_action :set_user, only: %i[ show edit update destroy ]
+  before_action :set_user, only: %i[show edit update destroy]
   helper_method :sort_column, :sort_direction
 
   def index
     (@pagy, @users) = pagy_search_sort(params[:query], User)
     respond_to do |format|
       format.html
-      format.csv { send_data User.all.to_csv, filename: "users-#{Date.today}.csv" }
+      format.csv { send_data CsvGeneratorService.new(User).to_csv_export, filename: "users-#{Date.today}.csv" }
     end
   end
 

@@ -1,13 +1,13 @@
 class Admin::LocationsController < AdminController
   include SearchSort
-  before_action :set_location, only: %i[ show edit update destroy ]
+  before_action :set_location, only: %i[show edit update destroy]
   helper_method :sort_column, :sort_direction
 
   def index
     (@pagy, @locations) = pagy_search_sort(params[:query], Location)
     respond_to do |format|
       format.html
-      format.csv { send_data Location.all.to_csv, filename: "locations-#{Date.today}.csv" }
+      format.csv { send_data CsvGeneratorService.new(Location).to_csv_export, filename: "locations-#{Date.today}.csv" }
     end
   end
 

@@ -11,7 +11,7 @@ class User < ApplicationRecord
   pg_search_scope :search, against: [:id, :first_name, :email]
 
   devise :invitable, :database_authenticatable, :registerable,
-  :recoverable, :rememberable, :validatable, :confirmable, validate_on_invite: true
+         :recoverable, :rememberable, :validatable, :confirmable, validate_on_invite: true
 
   enum role: [:user, :admin]
 

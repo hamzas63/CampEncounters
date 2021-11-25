@@ -5,29 +5,9 @@ class Admin::ApplicationsController < AdminController
     @applications = Application.all
   end
 
-  def show
-    @application = Application.find(params[:id])
-  end
-
-  def new
-    @application = Application.new
-  end
+  def show; end
 
   def edit; end
-
-  def create
-    @application = Application.new(application_params)
-
-    respond_to do |format|
-      if @application.save
-        format.html { redirect_to admin_applications_path, notice: 'Application was successfully created.' }
-        format.json { render :show, status: :created, location: @application }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @application.errors, status: :unprocessable_entity }
-      end
-    end
-  end
 
   def update
     respond_to do |format|

@@ -1,19 +1,19 @@
 class Admin::CampsController < AdminController
   include SearchSort
+
   before_action :set_camp, only: %i[show edit update destroy toggle_status]
   helper_method :sort_column, :sort_direction
 
   def index
     (@pagy, @camps) = pagy_search_sort(params[:query], Camp)
+
     respond_to do |format|
       format.html
       format.csv { send_data CsvGeneratorService.new(Camp).to_csv_export, filename: "camps-#{Date.today}.csv" }
     end
   end
 
-  def show
-    @camp = Camp.find(params[:id])
-  end
+  def show; end
 
   def new
     @camp = Camp.new

@@ -1,19 +1,19 @@
 class Admin::LocationsController < AdminController
   include SearchSort
+
   before_action :set_location, only: %i[show edit update destroy]
   helper_method :sort_column, :sort_direction
 
   def index
     (@pagy, @locations) = pagy_search_sort(params[:query], Location)
+
     respond_to do |format|
       format.html
       format.csv { send_data CsvGeneratorService.new(Location).to_csv_export, filename: "locations-#{Date.today}.csv" }
     end
   end
 
-  def show
-    @location = Location.find params[:id]
-  end
+  def show; end
 
   def new
     @location = Location.new
@@ -23,6 +23,7 @@ class Admin::LocationsController < AdminController
 
   def create
     @location = Location.new(location_params)
+
     respond_to do |format|
       if @location.save
         format.html { redirect_to admin_locations_path, notice: 'Location was successfully created.' }

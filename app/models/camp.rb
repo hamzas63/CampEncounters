@@ -26,7 +26,6 @@ class Camp < ApplicationRecord
     end
   end
 
-
   def self.attributes
     %w[name]
   end

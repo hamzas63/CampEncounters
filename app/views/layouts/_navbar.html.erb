@@ -1,0 +1,20 @@
+<nav class="navbar navbar-light bg-light">
+  <span class="navbar-brand mb-0 h1">Global Encounters</span>
+  <% if user_signed_in? %>
+    <%= link_to 'ShowProfile', current_user %>
+    <% if current_user.admin? %>
+      <%= link_to 'Camps', admin_camps_path %>
+      <%= link_to 'Locations', admin_locations_path %>
+      <%= link_to 'Users', admin_users_path %>
+      <%= link_to 'Registrations', admin_applications_path %>
+    <% else %>
+      <%= link_to 'Select Camps', camps_path %>
+    <% end %>
+    <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
+  <% else %>
+    <div class="links">
+      <%= link_to 'Register', new_user_registration_path %>
+      <%= link_to 'Sign in', new_user_session_path %>
+    </div>
+  <% end %>
+</nav>

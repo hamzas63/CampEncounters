@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   resources :applications
   resources :camps do
     member do
-      get :application
+      get :apply
       get :already_signed
     end
   end

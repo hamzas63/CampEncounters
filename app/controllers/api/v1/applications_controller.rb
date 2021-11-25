@@ -1,7 +1,6 @@
 module Api
   module V1
-    class ApplicationsController < ApplicationController
-      skip_before_action :verify_authenticity_token
+    class ApplicationsController < ActionController::API
 
       def index
         applications = Application.all
@@ -18,7 +17,7 @@ module Api
         if application.save
           render json: application
         else
-          render json: {"error": "could not create it"}
+          render json: { error: application.errors.full_messages.to_sentence }
         end
       end
 

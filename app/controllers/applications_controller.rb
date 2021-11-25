@@ -26,16 +26,11 @@ class ApplicationsController < ApplicationController
   private
 
   def set_progress
-    if wizard_steps.any? && wizard_steps.index(step).present?
-      @application.progress = ((wizard_steps.index(step) + 3).to_d / wizard_steps.count.to_d) * 100
-      @application.save
-    else
-      @application.progress = 0
-    end
+    @application.update_progress(wizard_steps, step)
   end
 
   def set_application
-    @application = Application.find_by_id(session[:application_id])
+    @application = current_user.applications.find_by_id(session[:application_id])
   end
 
   def application_params

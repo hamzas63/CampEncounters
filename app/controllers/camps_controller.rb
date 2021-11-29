@@ -72,7 +72,7 @@ class CampsController < ApplicationController
   private
 
   def validate_camp_active
-    result = CheckDate.call(date1: @camp.end_date, date2: Date.today)
+    result = CheckDate.call(end_date: @camp.end_date, current_date: Date.today)
     return if result.success?
 
     redirect_to camps_path, notice: 'Please participate in next camp.'

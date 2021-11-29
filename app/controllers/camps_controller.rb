@@ -1,5 +1,5 @@
 class CampsController < ApplicationController
-  before_action :set_camp, only: %i[apply show]
+  before_action :set_camp, only: %i[apply show already_signed]
   before_action :validate_camp_active, only: :apply
 
   def index
@@ -50,9 +50,13 @@ class CampsController < ApplicationController
   end
 
   def already_signed
-     @application = Application.find_or_create_by(user_id: current_user.id, camp_id: params[:id])
-     session[:application_id]=@application.id
-     redirect_to application_path(:index, application: @application)
+     @application = current_user.applications.find_or_initialize_by(camp_id: @camp)
+  if @application.persisted?
+    session[:application_id] = @application.id
+    redirect_to application_path(:index, application: @application)
+  else
+    redirect_to camp_path(@camp)
+  end
 
   end
 
@@ -69,7 +73,7 @@ class CampsController < ApplicationController
   private
 
   def validate_camp_active
-    result = CheckDate.call(a: @camp.start_date, b: Date.today)
+    result = CheckDate.call(date1: @camp.end_date, date2: Date.today)
     return if result.success?
 
     redirect_to camps_path, notice: 'Please participate in next camp.'

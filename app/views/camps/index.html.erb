@@ -13,11 +13,11 @@
         <tr>
           <% if camp.active? %>
             <td><%= camp.name %></td>
-            <% if !camp.users.exists?(current_user.id) %>
-              <td><%= link_to 'Select', camp_path(camp) , class: 'btn btn-outline-danger btn-sm' %></td>
-            <% else %>
+            <%# if !camp.users.exists?(current_user.id) %>
+              <td><%#= link_to 'Select', camp_path(camp) , class: 'btn btn-outline-danger btn-sm' %></td>
+            <%# else %>
               <td><%= link_to 'Select', already_signed_camp_path(camp) , class: 'btn btn-outline-danger btn-sm' %></td>
-            <% end %>
+            <%# end %>
           <% end %>
         </tr>
       <% end %>

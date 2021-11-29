@@ -6,7 +6,7 @@ class Camp < ApplicationRecord
 
   include PgSearch::Model
 
-  pg_search_scope :search, against: [:name, :camp_type, :status], using: {tsearch: {prefix: true, dictionary: "english"}}
+  pg_search_scope :search, against: [:name, :camp_type, :status], using: { tsearch: { prefix: true, dictionary: "english" } }
 
   enum status: [:active, :inactive]
 
@@ -32,22 +32,20 @@ class Camp < ApplicationRecord
   end
 
   def location_names
-    locations.pluck(:name).reject(&:blank?).join('  ')
+    locations.pluck(:name).reject(&:blank?).join(' | ')
   end
 
   def end_date_after_start_date?
-    if !end_date.nil? && !start_date.nil?
-      if end_date < start_date
-        errors.add :end_date, "must be after start date"
-      end
-    end
+    return if end_date.blank? || start_date.blank?
+    return if end_date > start_date
+
+    errors.add(:end_date, "must be after start date")
   end
 
   def end_date_after_registration_date?
-    if !end_date.nil? && !registartion_date.nil?
-      if end_date < registartion_date
-        errors.add :registartion_date, "must be before end date"
-      end
-    end
+    return if end_date.blank? || registartion_date.blank?
+    return if end_date > registartion_date
+
+    errors.add :registartion_date, "must be before end date"
   end
 end

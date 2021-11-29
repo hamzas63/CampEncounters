@@ -50,14 +50,13 @@ class CampsController < ApplicationController
   end
 
   def already_signed
-     @application = current_user.applications.find_or_initialize_by(camp_id: @camp)
-  if @application.persisted?
-    session[:application_id] = @application.id
-    redirect_to application_path(:index, application: @application)
-  else
-    redirect_to camp_path(@camp)
-  end
-
+    @application = current_user.applications.find_or_initialize_by(camp_id: @camp)
+    if @application.persisted?
+      session[:application_id] = @application.id
+      redirect_to application_path(:index, application: @application)
+    else
+      redirect_to camp_path(@camp)
+    end
   end
 
   def apply

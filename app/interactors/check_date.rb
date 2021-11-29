@@ -2,7 +2,7 @@ class CheckDate
   include Interactor
 
   def call
-    if context.a > context.b
+    if context.date1 > context.date2
       context.success!
     else
       context.fail!

@@ -8,7 +8,7 @@ class User < ApplicationRecord
   has_many :applications
   has_many :camps, through: :applications
 
-  pg_search_scope :search, against: [:id, :first_name, :email]
+  pg_search_scope :search, against: [:id, :first_name, :email], using: {tsearch: {prefix: true, dictionary: "english"}}
 
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable, validate_on_invite: true

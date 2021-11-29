@@ -13,11 +13,11 @@
         <th><%= sortable 'name' %></th>
         <th><%= sortable 'camp_type' %></th>
         <th><%= sortable 'status' %></th>
-        <th>registartion_date</th>
         <th>location</th>
         <th>Delete</th>
         <th>Show</th>
         <th>Edit</th>
+        <th>Change Status</th>
       </tr>
     </thead>
 
@@ -27,17 +27,11 @@
           <td><%= camp.name %></td>
           <td><%= camp.camp_type %></td>
           <td><%= camp.status %></td>
-          <td><%= camp.registartion_date %></td>
-          <td>
-            <% camp.locations.each do |c|%>
-              <%= "|" %>
-              <%= c.name %>
-            <%end%>
-          </td>
+           <td><%= camp.location_names %></td>
           <td><%= link_to 'Delete', admin_camp_path(camp), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger btn-sm' %></td>
           <td><%= link_to 'Show', admin_camp_path(camp) , class: 'btn btn-outline-danger btn-sm' %></td>
           <td><%= link_to 'Edit', edit_admin_camp_path(camp) , class: 'btn btn-outline-danger btn-sm' %></td>
-          <td><%= link_to 'Activate', toggle_status_admin_camp_path(camp) , class: 'btn btn-outline-danger btn-sm' %></td>
+          <td><%= link_to 'Change', toggle_status_admin_camp_path(camp) , class: 'btn btn-outline-danger btn-sm' %></td>
         </tr>
       <% end %>
     </tbody>

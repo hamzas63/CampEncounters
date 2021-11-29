@@ -23,6 +23,15 @@
     <%= f.text_field :phone, autofocus: true, autocomplete: "phone" %>
   </div>
 
+  <div class='form-group'>
+    <% if @user.image.attached? %>
+      <%= image_tag @user.image, class: 'image' %>
+    <% end %>
+
+    <%= f.label :image %>
+    <%= f.file_field :image, class: 'form-control' %>
+  </div>
+
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>

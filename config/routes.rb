@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   devise_for :users
  # get 'users/sign_out' => 'devise/sessions#destroy'
   root to: "home#index"
-
   namespace :admin do
     resources :users
     resources :camps do

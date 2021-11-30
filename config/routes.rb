@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   resources :search, only: [:index]
   devise_for :users
  # get 'users/sign_out' => 'devise/sessions#destroy'
-  root to: "home#index"
   namespace :admin do
     resources :users
     resources :camps do
@@ -28,4 +27,6 @@ Rails.application.routes.draw do
       get :already_signed
     end
   end
+
+  root to: "home#index"
 end

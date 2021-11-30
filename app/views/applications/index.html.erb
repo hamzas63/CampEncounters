@@ -10,46 +10,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Step 2</td>
-          <td><%= link_to 'Continue', application_path(:step2, application: @application) , class: 'btn btn-outline-danger btn-sm' %></td>
-        </tr>
-        <tr>
-          <td>Step 3</td>
-          <td><%= link_to 'Continue', application_path(:step3, application: @application) , class: 'btn btn-outline-danger btn-sm' %></td>
-        </tr>
-        <tr>
-          <td>Step 4</td>
-          <td><%= link_to 'Continue', application_path(:step4, application: @application) , class: 'btn btn-outline-danger btn-sm' %></td>
-        </tr>
-        <tr>
-          <td>Step 5</td>
-          <td><%= link_to 'Continue', application_path(:step5, application: @application) , class: 'btn btn-outline-danger btn-sm' %></td>
-        </tr>
-        <tr>
-          <td>Step 6</td>
-          <td><%= link_to 'Continue', application_path(:step6, application: @application) , class: 'btn btn-outline-danger btn-sm' %></td>
-        </tr>
-        <tr>
-          <td>Step 7</td>
-          <td><%= link_to 'Continue', application_path(:step7, application: @application) , class: 'btn btn-outline-danger btn-sm' %></td>
-        </tr>
-        <tr>
-          <td>Step 8</td>
-          <td><%= link_to 'Continue', application_path(:step8, application: @application) , class: 'btn btn-outline-danger btn-sm' %></td>
-        </tr>
-        <tr>
-          <td>Step 9</td>
-          <td><%= link_to 'Continue', application_path(:step9, application: @application) , class: 'btn btn-outline-danger btn-sm' %></td>
-        </tr>
-        <tr>
-          <td>Step 10</td>
-          <td><%= link_to 'Continue', application_path(:step10, application: @application) , class: 'btn btn-outline-danger btn-sm' %></td>
-        </tr>
-        <tr>
-          <td>Step 11</td>
-          <td><%= link_to 'Continue', application_path(:step11, application: @application) , class: 'btn btn-outline-danger btn-sm' %></td>
-        </tr>
+        <% wizard_steps.first(10).each do |s|%>
+          <tr>
+            <td><%= s %></td>
+            <td><%= link_to 'Continue', application_path(:"#{s}", application: @application) , class: 'btn btn-outline-danger btn-sm' %></td>
+          </tr>
+        <% end %>
       </tbody>
     </table>
 

@@ -2,7 +2,7 @@
 <%= form_for @application, method: :put, url: wizard_path do |f| %>
   <%= hidden_field_tag :application_id, @application.id %>
   <%= f.label :medicine, "Medicine" %>
-  <%= f.text_field :medicine %>
+  <%= f.rich_text_area :medicine %>
   <div class="actions">
     <% if @application.progress == 91 %>
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">

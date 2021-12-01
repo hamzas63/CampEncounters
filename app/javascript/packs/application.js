@@ -22,3 +22,6 @@ $(document).ready(function () {
     }
   });
 });
+
+require("trix")
+require("@rails/actiontext")

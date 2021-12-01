@@ -20,6 +20,6 @@ class ApplicationController < ActionController::Base
       admin_locations_path
     elsif resource.user?
       camps_path
-     end
+    end
   end
 end

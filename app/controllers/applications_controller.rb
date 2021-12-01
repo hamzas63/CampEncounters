@@ -7,7 +7,7 @@ class ApplicationsController < ApplicationController
   steps :step2, :step3, :step4, :step5, :step6, :step7, :step8, :step9, :step10, :step11, :index, :application_view
 
   def index
-    @applications =  Application.all
+    @applications = Application.all
   end
 
   def show

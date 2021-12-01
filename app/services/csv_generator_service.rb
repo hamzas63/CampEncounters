@@ -1,13 +1,15 @@
 class CsvGeneratorService
+  attr_accessor :klass
+
   def initialize(klass)
-    @class= klass
+    @klass = klass
   end
 
   def to_csv_export
     CSV.generate(headers: true) do |csv|
-      csv << @class.attributes
-      @class.all.each do |l|
-        csv << @class.attributes.map{ |attr| l[attr] }
+      csv << klass.attributes
+      klass.all.each do |l|
+        csv << klass.attributes.map { |attr| l[attr] }
       end
     end
   end

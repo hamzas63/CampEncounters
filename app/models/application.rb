@@ -10,4 +10,12 @@ class Application < ApplicationRecord
       self.progress = 0
     end
   end
+
+  def check_progress
+    self.progress == 100
+  end
+
+  def last_step
+    self.progress == 91
+  end
 end

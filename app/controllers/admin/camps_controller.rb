@@ -73,6 +73,6 @@ class Admin::CampsController < AdminController
   end
 
   def camp_params
-    params.require(:camp).permit(:name, :camp_type, :status, :start_date, :end_date, :registartion_date, location_ids:[])
+    params.require(:camp).permit(:name, :camp_type, :status, :start_date, :end_date, :registartion_date, location_ids: [])
   end
 end

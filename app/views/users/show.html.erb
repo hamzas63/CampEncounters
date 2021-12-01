@@ -2,29 +2,29 @@
 
 <p>
   <strong>Name:</strong>
-  <%= @user.first_name %><br/>
+  <%= @user.first_name %><br />
 
   <strong>Last Name:</strong>
-  <%= @user.last_name %><br/>
+  <%= @user.last_name %><br />
 
   <strong>Country:</strong>
-  <%= @user.country %><br/>
+  <%= @user.country %><br />
 
   <strong>Email:</strong>
-  <%= @user.email %><br/>
+  <%= @user.email %><br />
 
   <strong>Phone Number:</strong>
-  <%= @user.phone %><br/>
+  <%= @user.phone %><br />
 
   <% if @user.image.attached? %>
     <%= image_tag @user.image, class: "image" %>
   <% end %>
 
-<%= link_to "Edit Profile", edit_user_registration_path %>
+  <%= link_to "Edit Profile", edit_user_registration_path %>
 
-<% if !@user.admin? %>
-  <%= link_to 'Back', users_path %>
-<% end %>
-<% if @user.admin? %>
-  <%= link_to 'Back', admin_users_path %>
-<% end %>
+  <% if @user.admin? %>
+    <%= link_to 'Back', admin_users_path %>
+  <% else %>
+    <%= link_to 'Back', users_path %>
+  <% end %>
+</p>

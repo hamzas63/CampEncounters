@@ -1,53 +1,55 @@
-<h1> This is your application </h1>
-<p>
-  <strong>Name:</strong>
-  <%= current_user.first_name %><br/>
+<% if @application.check_progress %>
+  <h1> This is your application </h1>
+  <p>
+    <strong>Name:</strong>
+    <%= current_user.first_name %><br />
 
-  <strong>Last Name:</strong>
-  <%= current_user.last_name %><br/>
+    <strong>Last Name:</strong>
+    <%= current_user.last_name %><br />
 
-  <strong>Country:</strong>
-  <%= current_user.country %><br/>
+    <strong>Country:</strong>
+    <%= current_user.country %><br />
 
-  <strong>Email:</strong>
-  <%= current_user.email %><br/>
+    <strong>Email:</strong>
+    <%= current_user.email %><br />
 
-  <strong>Phone Number:</strong>
-  <%= current_user.phone %><br/>
+    <strong>Phone Number:</strong>
+    <%= current_user.phone %><br />
 
-  <% if current_user.image.attached? %>
-    <%= image_tag current_user.image, class: "image" %>
-  <% end %>
+    <% if current_user.image.attached? %>
+      <%= image_tag current_user.image, class: "image" %>
+    <% end %>
 
-  <strong>Gender:</strong>
-  <%= @application.gender %><br/>
+    <strong>Gender:</strong>
+    <%= @application.gender %><br />
 
-  <strong>Date of birth:</strong>
-  <%= @application.dob %><br/>
+    <strong>Date of birth:</strong>
+    <%= @application.dob %><br />
 
-  <strong>Occupation:</strong>
-  <%= @application.occupation %><br/>
+    <strong>Occupation:</strong>
+    <%= @application.occupation %><br />
 
-  <strong>Nationality:</strong>
-  <%= @application.nationality %><br/>
+    <strong>Nationality:</strong>
+    <%= @application.nationality %><br />
 
-  <strong>Weight:</strong>
-  <%= @application.weight %><br/>
+    <strong>Weight:</strong>
+    <%= @application.weight %><br />
 
-  <strong>Height:</strong>
-  <%= @application.height %><br/>
+    <strong>Height:</strong>
+    <%= @application.height %><br />
 
-  <strong>Allergy:</strong>
-  <%= @application.allergy %><br/>
+    <strong>Allergy:</strong>
+    <%= @application.allergy %><br />
 
-  <strong>Medicine:</strong>
-  <%= @application.medicine %><br/>
+    <strong>Medicine:</strong>
+    <%= @application.medicine %><br />
 
-  <strong>Bloodgroup:</strong>
-  <%= @application.blood_group %><br/>
+    <strong>Bloodgroup:</strong>
+    <%= @application.blood_group %><br />
 
-  <strong>Martial Status:</strong>
-  <%= @application.martial_status %><br/>
-</p>
+    <strong>Martial Status:</strong>
+    <%= @application.martial_status %><br />
+  </p>
 
-<%= link_to 'Back', applications_path %>
+  <%= link_to 'Back', applications_path %>
+<% end %>

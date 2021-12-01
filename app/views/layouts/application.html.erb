@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang=''>
   <head>
     <title>CampEncounters</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -10,14 +10,15 @@
   </head>
   <%= render 'layouts/navbar' %>
   <body>
-  <section class="h-100 h-custom" style="background-color: #3cb371;">
-    <div class="container py-5 h-100">
-      <div class="card rounded-3">
-        <div class="card-body p-4 p-md-5">
-          <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2"></h3>
-          <%= yield %>
+    <section class="h-100 h-custom" style="background-color: #3cb371;">
+      <div class="container py-5 h-100">
+        <div class="card rounded-3">
+          <div class="card-body p-4 p-md-5">
+            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2"></h3>
+            <%= yield %>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </body>
 </html>

@@ -1,6 +1,6 @@
 <% if user_signed_in? %>
   <h2>Your application is <%= @application.progress %> % complete </h2>
-  <% if @application.progress!=100 %>
+  <% unless @application.check_progress %>
     <h2>Please fill out your remaining application</h2>
     <table class='table table-striped table-bordered table-hover'>
       <thead class='thead-dark'>
@@ -10,19 +10,19 @@
         </tr>
       </thead>
       <tbody>
-        <% wizard_steps.first(10).each do |s|%>
+        <% wizard_steps.first(10).each do |s| %>
           <tr>
             <td><%= s %></td>
-            <td><%= link_to 'Continue', application_path(:"#{s}", application: @application) , class: 'btn btn-outline-danger btn-sm' %></td>
+            <td><%= link_to 'Continue', application_path(s.to_sym, application: @application), class: 'btn btn-outline-danger btn-sm' %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
 
-    <%= link_to 'Select Camps', camps_path %><br/>
+    <%= link_to 'Select Camps', camps_path %><br />
 
   <% else %>
-    <td><%= link_to 'Show Application', application_path(:application_view, application: @application) , class: 'btn btn-outline-danger btn-sm' %></td>
-    <%= link_to 'Select Camps', camps_path %><br/>
+    <td><%= link_to 'Show Application', application_path(:application_view, application: @application), class: 'btn btn-outline-danger btn-sm' %></td>
+    <%= link_to 'Select Camps', camps_path %><br />
   <% end %>
 <% end %>

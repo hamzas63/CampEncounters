@@ -2,7 +2,7 @@
   <%= link_to 'Add Camp', new_admin_camp_path %>
   <%= form_with(url: admin_camps_path, method: :get) do |f| %>
     <%= f.text_field :query %>
-    <%= f.submit 'Search'%>
+    <%= f.submit 'Search' %>
   <% end %>
 
   <%= link_to 'Undo Search', admin_camps_path, class: 'mb-3' %>
@@ -27,17 +27,17 @@
           <td><%= camp.name %></td>
           <td><%= camp.camp_type %></td>
           <td><%= camp.status %></td>
-           <td><%= camp.location_names %></td>
+          <td><%= camp.location_names %></td>
           <td><%= link_to 'Delete', admin_camp_path(camp), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger btn-sm' %></td>
-          <td><%= link_to 'Show', admin_camp_path(camp) , class: 'btn btn-outline-danger btn-sm' %></td>
-          <td><%= link_to 'Edit', edit_admin_camp_path(camp) , class: 'btn btn-outline-danger btn-sm' %></td>
-          <td><%= link_to 'Change', toggle_status_admin_camp_path(camp) , class: 'btn btn-outline-danger btn-sm' %></td>
+          <td><%= link_to 'Show', admin_camp_path(camp), class: 'btn btn-outline-danger btn-sm' %></td>
+          <td><%= link_to 'Edit', edit_admin_camp_path(camp), class: 'btn btn-outline-danger btn-sm' %></td>
+          <td><%= link_to 'Change', toggle_status_admin_camp_path(camp), class: 'btn btn-outline-danger btn-sm' %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
 
-  <%= link_to 'Download CSV', admin_camps_path(@camps, format: :csv), class: 'mb-3' %><br/>
+  <%= link_to 'Download CSV', admin_camps_path(@camps, format: :csv), class: 'mb-3' %><br />
 
   <%= pagy_bootstrap_nav(@pagy).html_safe %>
 <% end %>

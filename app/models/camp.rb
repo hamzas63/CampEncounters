@@ -12,6 +12,7 @@ class Camp < ApplicationRecord
 
   validate :end_date_after_start_date?, :end_date_after_registration_date?
   validates :name, :end_date, :start_date, presence: true
+  validates :name, uniqueness: true
 
   after_initialize :set_default_status, if: :new_record?
 

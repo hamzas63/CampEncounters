@@ -39,6 +39,7 @@ class User < ApplicationRecord
   end
 
   validate :validate_password, unless: lambda { |u| u.password.nil? }
+  validates_length_of :password, minimum: 7, unless: lambda { |u| u.password.nil? }
   validates :first_name, :phone, :country, presence: true
   validates :phone, numericality: { greater_than_or_equal_to: 0, only_integer: true }
   validates :terms_of_service, acceptance: { message: 'You have to agree to the terms of service. Contact Admin at xyz@projectname.com' }

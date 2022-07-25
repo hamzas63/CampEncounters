@@ -22,6 +22,7 @@
     <%= link_to 'Select Camps', camps_path %><br />
 
   <% else %>
+    <h2>Congratulations!</h2>
     <td><%= link_to 'Show Application', application_path(:application_view, application: @application), class: 'btn btn-outline-danger btn-sm' %></td>
     <%= link_to 'Select Camps', camps_path %><br />
   <% end %>

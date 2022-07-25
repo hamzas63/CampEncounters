@@ -1,7 +1,7 @@
 <nav class="navbar navbar-light bg-light">
   <span class="navbar-brand mb-0 h1">Global Encounters</span>
   <% if user_signed_in? %>
-    <%= link_to 'ShowProfile', current_user %>
+    <%= link_to 'My Profile', current_user %>
     <% if current_user.admin? %>
       <%= link_to 'Camps', admin_camps_path %>
       <%= link_to 'Locations', admin_locations_path %>
